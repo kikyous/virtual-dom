@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virtual DOM</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      img { max-width: 100%; height: auto;}
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Virtual DOM
+
+
+---
+
+# DOM
+
+The Document Object Model (DOM) is a programming interface for HTML and XML documents. It represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects. That way, programming languages can connect to the page.
+
+A Web page is a document. This document can be either displayed in the browser window or as the HTML source. But it is the same document in both cases. The Document Object Model (DOM) represents that same document so it can be manipulated. The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript.
+
+
+???
+
+<https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction>
+
+---
+
+# 为什么需要 Virtual DOM
+
+
+* DOM 操作很昂贵
+  * DOM 对象有几百个方法和属性
+  * DOM 改变时要重新计算 CSS，重新布局
+
+---
+
+# List Page
+
+
+![image.png](https://i.loli.net/2019/11/17/Xze9lTjanBuRrwG.png)
+
+---
+
+# Render Next Page jQuery Way
+
+```js
+let data = [{number: 'xxxx', status: 'xxx'...}, ...]
+
+let html = ''
+for (let i of data) {
+  html += "<tr><td>${i.number}</td> <td>${i.status}</td> ...</tr>"
+}
+
+$('table').html(html);
+
+```
+
+---
+# Way 2
+
+```js
+document.querySelector('.td1').innerHTML = '...';
+document.querySelector('.td2').innerHTML = '...';
+document.querySelector('.td3').innerHTML = '...';
+document.querySelector('.td4').innerHTML = '...';
+...
+```
+
+---
+
+# Virtual DOM
+
+```js
+const copy = {
+  tagName: "ul",
+  attributes: { "class": "list" },
+  children: [
+    {
+        tagName: "li",
+        attributes: { "class": "list__item" },
+        textContent: "List item one"
+    },
+    {
+        tagName: "li",
+        attributes: { "class": "list__item" },
+        textContent: "List item two"
+    }
+  ]
+};
+```
+
+---
+## Diff
+
+![image.png](https://i.loli.net/2019/11/17/dQzGRJstlXkaAhF.png)
+
+---
+
+## Example
+
+<a href="./example.html" target='_blank'>example</a>
+
+
+---
+
+## Virtual DOM
+
+* 用 way 1 的代码获得近似 way 2 的运行效率
+* 用更多的 cpu 计算换取更少的 DOM 操作
+* 在拥有高效开发效率的同时获得较高的运行速度
+
+---
+class: center, middle
+# 感谢
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

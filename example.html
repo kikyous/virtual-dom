@@ -1,0 +1,44 @@
+
+<html>
+  <body>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js'></script>
+    <div id='app'>
+      <button v-on:click='toggle'>Toggle</button>
+      <table border="1">
+        <tbody>
+        <tr v-for='i in items'>
+          <td>{{i.message}}</td>
+          <td>{{i.status}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+var app = new Vue({
+  el: '#app',
+  methods: {
+    toggle: function() {
+      if (this.items === this.items0) {
+        this.items = this.items1;
+      } else {
+        this.items = this.items0;
+      };
+    }
+  },
+  data: {
+    items: [],
+    items0: [
+      { message: 'Foo', status: 'OK' },
+      { message: 'Bar', status: 'OK' }
+    ],
+    items1: [
+      { message: 'Foo1', status: 'FAILED' },
+      { message: 'Bar1', status: 'OK' }
+    ]
+  }
+})
+    </script>
+  </body>
+
+</html>
