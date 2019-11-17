@@ -63,7 +63,7 @@ let data = [{number: 'xxxx', status: 'xxx'...}, ...]
 
 let html = ''
 for (let i of data) {
-  html += "<tr><td>${i.number}</td> <td>${i.status}</td> ...</tr>"
+  html += `<tr><td>${i.number}</td> <td>${i.status}</td> ...</tr>`
 }
 
 $('table').html(html);

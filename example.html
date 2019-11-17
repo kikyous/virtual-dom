@@ -3,7 +3,7 @@
   <body>
     <script src='https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js'></script>
     <div id='app'>
-      <button v-on:click='toggle'>Toggle</button>
+      <button v-on:click='toggle'>Toggle With Virtual DOM</button>
       <table border="1">
         <tbody>
         <tr v-for='i in items'>
@@ -13,32 +13,55 @@
         </tbody>
       </table>
     </div>
+    <div id='app2'>
+      <button on-click='toggle'>Toggle Without Virtual DOM</button>
+      <table border="1">
+        <tbody></tbody>
+      </table>
+    </div>
 
     <script>
+let items0 = [
+  { message: 'Foo', status: 'OK' },
+  { message: 'Bar', status: 'OK' }
+];
+let items1 = [
+  { message: 'Foo1', status: 'FAILED' },
+  { message: 'Bar1', status: 'OK' }
+];
+
 var app = new Vue({
   el: '#app',
   methods: {
     toggle: function() {
-      if (this.items === this.items0) {
-        this.items = this.items1;
+      if (this.items === items0) {
+        this.items = items1;
       } else {
-        this.items = this.items0;
+        this.items = items0;
       };
     }
   },
   data: {
     items: [],
-    items0: [
-      { message: 'Foo', status: 'OK' },
-      { message: 'Bar', status: 'OK' }
-    ],
-    items1: [
-      { message: 'Foo1', status: 'FAILED' },
-      { message: 'Bar1', status: 'OK' }
-    ]
   }
 })
+
+let items = [];
+function toggle() {
+  if (items === items0) {
+    items = items1;
+  } else {
+    items = items0;
+  }
+  let html='';
+  for (let i of items) {
+    html += `<tr> <td> ${i.message} </td> <td> ${i.status} </td> </tr>`;
+  }
+  document.querySelector('#app2 table tbody').innerHTML = html;
+
+}
+document.querySelector('#app2 button').onclick = toggle;
+
     </script>
   </body>
-
 </html>
